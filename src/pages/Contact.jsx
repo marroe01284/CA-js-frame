@@ -1,53 +1,70 @@
 import { useForm } from "react-hook-form";
 
 export function Contact() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const onSubmit = (data) => {
     console.log(data);
   };
   return (
-    <form
-      className="flex flex-col gap-4 mx-auto max-w-md p-6 bg-white rounded-md shadow-md"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <input
-        {...register("name", {
-          required: true,
-          minLength: 3,
-        })}
-        placeholder="Name"
-      />
-      <input
-        {...register("subject", {
-          required: true,
-          minLength: 3,
-        })}
-        placeholder="Subject"
-      />
-      <input
-        {...register("email", {
-          required: true,
-          pattern: {
-            value: /noroff\.no/,
-            message: "Email must include @student.noroff.no",
-          },
-        })}
-        placeholder="Email address"
-      />
-      <input
-        {...register("message", {
-          required: true,
-          minLength: 3,
-        })}
-        placeholder="Message"
-      />
-      <button
-        className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer"
-        type="submit"
+    <div className="p-4 max-w-md mx-auto">
+      <h1 className="text-3xl font-bold mb-6 text-center">Contact Us</h1>
+      <form
+        className="flex flex-col gap-4 p-6 bg-white rounded-md shadow-md"
+        onSubmit={handleSubmit(onSubmit)}
       >
-        Submit
-      </button>
-    </form>
-  );
+        <input
+          {...register("name", {
+            required: true,
+            minLength: 3,
+          })}
+          placeholder="Name"
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          {...register("subject", {
+            required: true,
+            minLength: 3,
+          })}
+          placeholder="Subject"
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
+        <input
+          {...register("email", {
+            required: true,
+            pattern: {
+              value: /noroff\.no/,
+              message: "Email must include @student.noroff.no",
+            },
+          })}
+          placeholder="Email address"
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {errors.email &&
+          (errors.email.message ? (
+            <p className="text-red-600">{errors.email.message}</p>
+          ) : (
+            <p className="text-red-600">Unexpected error</p>
+          ))}
+        <textarea
+          {...register("message", {
+            required: true,
+            minLength: 3,
+          })}
+          placeholder="Message"
+          className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none h-32"
+        />
+        <button
+          className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  );
 }
