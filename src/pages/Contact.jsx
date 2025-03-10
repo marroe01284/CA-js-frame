@@ -24,6 +24,9 @@ export function Contact() {
           placeholder="Name"
           className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+        {errors.name && (
+          <p className="text-red-600">Name must be at least 3 characters long</p>
+        )}
         <input
           {...register("subject", {
             required: true,
@@ -32,6 +35,9 @@ export function Contact() {
           placeholder="Subject"
           className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+         {errors.subject && (
+          <p className="text-red-600">Subject must be at least 3 characters long</p>
+        )}
 
         <input
           {...register("email", {
@@ -58,6 +64,9 @@ export function Contact() {
           placeholder="Message"
           className="border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none h-32"
         />
+        {errors.message && (
+          <p className="text-red-600">Text must be at least 3 characters long</p>
+        )}
         <button
           className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer"
           type="submit"

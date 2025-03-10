@@ -74,7 +74,7 @@ export function App() {
             <div className="p-4">
               <Link
                 to={`/${product.id}`}
-                className="block text-center w-32 py-2 bg-blue-600 text-white text-sm font-semibold rounded-md hover:bg-blue-700 transition-colors mx-auto"
+                className="block text-center w-32 py-2 bg-green-600 text-white text-sm font-semibold rounded-md hover:bg-white hover:text-black hover:border-black transition-colors mx-auto"
               >
                 View Product
               </Link>

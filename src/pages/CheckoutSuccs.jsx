@@ -27,7 +27,7 @@ export function CheckoutSucceeded() {
         to="/"
         className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
       >
-        Back to products
+        Back
       </Link>
     </div>
   );

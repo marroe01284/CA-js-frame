@@ -3,10 +3,11 @@ import { useCart } from "../store/store";
 import { useNavigate } from "react-router-dom";
 
 export function Checkout() {
-  const { cart, removeFromCart } = useCart();
+  const { cart, addToCart, removeFromCart } = useCart();
   const navigate = useNavigate();
 
-  const total = cart.reduce((acc, item) => acc + item.price, 0);
+  // Calculate total price correctly based on quantity
+  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
@@ -27,14 +28,23 @@ export function Checkout() {
                 <div>
                   <h2 className="text-xl font-semibold">{item.title}</h2>
                   <p className="text-gray-700">{item.price} kr</p>
+                  <p className="text-gray-700">Quantity: {item.quantity}</p>
                 </div>
               </div>
-              <button
-                className="mt-4 sm:mt-0 border border-red-500 p-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition-colors"
-                onClick={() => removeFromCart(item.id)}
-              >
-                Remove
-              </button>
+              <div className="flex items-center space-x-4 mt-4 sm:mt-0">
+                <button
+                  className="border border-green-500 p-2 rounded-md bg-green-500 text-white hover:bg-green-600 transition-colors"
+                  onClick={() => addToCart(item)}
+                >
+                  +
+                </button>
+                <button
+                  className="border border-red-500 p-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition-colors"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  -
+                </button>
+              </div>
             </li>
           ))}
         </ul>

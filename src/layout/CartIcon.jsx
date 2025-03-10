@@ -5,7 +5,8 @@ import { useCart } from "../store/store";
 
 const CartItemsCount = () => {
   const cartProducts = useCart((state) => state.cart);
-  return <span>{cartProducts.length}</span>;
+  const totalItems = cartProducts.reduce((acc, item) => acc + item.quantity, 0);
+  return <span>{totalItems}</span>;
 };
 
 export function ShoppingCart() {
